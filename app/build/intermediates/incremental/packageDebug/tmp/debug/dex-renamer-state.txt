@@ -1,0 +1,4 @@
+#Wed May 29 09:01:29 PDT 2019
+base.0=/Users/per2/Desktop/LeagueProject/app/build/intermediates/dex/debug/mergeDexDebug/out
+path.0=classes.dex
+renamed.0=classes.dex
