@@ -6,5 +6,5 @@ import retrofit2.http.Path;
 
 public interface MatchSearch {
     @GET("{gameId}?api_key=RGAPI-d111bafd-cc17-4242-abaf-ca15f06f284e")
-    Call<Match> searchByGame(@Path("gameId") String gameId);
+    Call<Match> searchByMatch(@Path("gameId") String gameId);
 }

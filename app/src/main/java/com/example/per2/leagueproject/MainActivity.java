@@ -3,6 +3,7 @@ package com.example.per2.leagueproject;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.LogPrinter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<MatchHistory> call, Response<MatchHistory> response) {
                 if (response.body() != null && response.body().getEndIndex() != 0) {
                     gameId = response.body().getMatches().get(0).getGameId() + "";
-                    Toast.makeText(MainActivity.this, gameId, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, gameId, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -124,9 +125,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void champPic() {
-
-    }
     public void searchIndMatch(String region, String gameId) {
         String url = "https://" + region + ".api.riotgames.com/lol/match/v4/matches/";
         Retrofit retrofit = new Retrofit.Builder()
@@ -136,20 +134,27 @@ public class MainActivity extends AppCompatActivity {
 
         MatchSearch service = retrofit.create(MatchSearch.class);
 
-        Call<Match> matchHistoryResponseCall = service.searchByGame(gameId);
+        Call<Match> MatchResponse = service.searchByMatch(gameId);
 
-        matchHistoryResponseCall.enqueue(new Callback<Match>() {
+        MatchResponse.enqueue(new Callback<Match>() {
             @Override
             public void onResponse(Call<Match> call, Response<Match> response) {
-                if (response.body() != null && !response.body().getGameMode().isEmpty()) {
-                    response.body().getParticipantIdentities().get(0).getPlayer();
+                if(response.body().getQueueId() == 325 || response.body().getQueueId()== 400 || response.body().getQueueId() == 430 || response.body().getQueueId() == 420
+                        || response.body().getQueueId() == 440 || response.body().getQueueId() == 450 || response.body().getQueueId() == 600
+                        || response.body().getQueueId() == 700 || response.body().getQueueId() == 830 || response.body().getQueueId() == 840
+                        || response.body().getQueueId() == 850) {
+                    for(int i = 0;i<response.body().getParticipants().size();i++) {
+                         String test = "" + response.body().getParticipants().get(i).getChampionId();
+                         response.body().getParticipants().get(i).getTeamId();
+                        Toast.makeText(MainActivity.this, test, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Match> call, Throwable t) {
                 Log.d("ENQUEUE", "onFailure: " + t.getMessage());
-                Toast.makeText(MainActivity.this, "FAIL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "FAILdsfa", Toast.LENGTH_SHORT).show();
             }
         });
     }
