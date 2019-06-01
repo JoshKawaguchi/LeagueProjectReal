@@ -3,7 +3,6 @@ package com.example.per2.leagueproject;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.LogPrinter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,7 @@ import com.google.gson.Gson;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public String reg;
     public String accId;
     public String gameId;
+    public static String[] ChampionIdentifier;
+    public List<Champ> champList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,26 +48,27 @@ public class MainActivity extends AppCompatActivity {
         // read your json file into an array of questions
         Champion champs = gson.fromJson(sJSON, Champion.class);
 //        // convert your array to a list using the Arrays utility class
-        List<Champ> champList = champs.getData();
-        reg = champList.size() + "";
-//        Test = new Quiz(questionList);
-//
-//        textViewQuestionNumber.setText(getString(R.string.quiz_QuizNumberQuestion) + Test.getCurrentQuestionDisplay() + getString(R.string.quiz_outOfTen));
-//        textViewQuestion.setText(Test.getQuestions().get(0).getQuestion());
-//        textViewScore.setText(Test.getScore() + " points out of " + Test.getQuestNum());
-        //use
+        champList = champs.getData();
+        ChampionIdentifier = new String[1000];
+        Identify();
         //Picasso.get().load("http://ddragon.leagueoflegends.com/cdn/9.9.1/img/champion/Zoe.png").placeholder(R.drawable.placeholder).into(test);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //reg = regionArray[region.getSelectedItemPosition()].toLowerCase();
-                //search(regionArray[region.getSelectedItemPosition()].toLowerCase(), "summoner",
-                //        "summoners", "by-name", "getAccountId");
-                searchMatchHistory("NA1", "snrqhdN_pW_jg3699jC-8yXX9VKB2PqYjJZV6ZNGuiDs_Q");
-                searchIndMatch("NA1", gameId);
+                reg = regionArray[region.getSelectedItemPosition()].toLowerCase();
+                search(regionArray[region.getSelectedItemPosition()].toLowerCase(), "summoner",
+                        "summoners", "by-name", "getAccountId");
             }
         });
+    }
+
+    private void Identify() {
+        for (int z = 0; z < champList.size(); z++) {
+            int champNum = Integer.parseInt(champList.get(z).getKey());
+            String champName = champList.get(z).getName();
+            ChampionIdentifier[champNum] = champName;
+        }
     }
 
     public void search(String region, String what, String type, String how, String WhatToGet) {
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Summoner> call, Response<Summoner> response) {
                 if (response.body() != null && !response.body().getAccountId().isEmpty()) {
                     accId = response.body().getAccountId();
-
+                    searchMatchHistory(reg, accId);
                     //Toast.makeText(MainActivity.this, response.body().getAccountId(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "That name doesn't exist", Toast.LENGTH_SHORT).show();
@@ -112,8 +116,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MatchHistory> call, Response<MatchHistory> response) {
                 if (response.body() != null && response.body().getEndIndex() != 0) {
-                    gameId = response.body().getMatches().get(0).getGameId() + "";
-//                    Toast.makeText(MainActivity.this, gameId, Toast.LENGTH_SHORT).show();
+                    int loadingLength;
+//                    if(response.body().getMatches().size()>=20){
+//                        loadingLength = 20;
+//                        for(int i = 0;i < loadingLength;i++) {
+//                            gameId = response.body().getMatches().get(i).getGameId() + "";
+//                            searchIndMatch(reg, gameId);
+//                        }
+//                    }else{
+//                        loadingLength = response.body().getMatches().size();
+//                        for(int i = 0;i < loadingLength;i++) {
+//                            gameId = response.body().getMatches().get(i).getGameId() + "";
+//                            searchIndMatch(reg, gameId);
+//                        }
+//                    }
+                    for (int i = 0; i < 20; i++) {
+                        searchIndMatch(reg, response.body().getMatches().get(0).getGameId() + "");
+                    }
                 }
             }
 
@@ -144,10 +163,13 @@ public class MainActivity extends AppCompatActivity {
                         || response.body().getQueueId() == 700 || response.body().getQueueId() == 830 || response.body().getQueueId() == 840
                         || response.body().getQueueId() == 850) {
                     for(int i = 0;i<response.body().getParticipants().size();i++) {
-                         String test = "" + response.body().getParticipants().get(i).getChampionId();
-                         response.body().getParticipants().get(i).getTeamId();
-                        Toast.makeText(MainActivity.this, test, Toast.LENGTH_SHORT).show();
+                        int champId = response.body().getParticipants().get(i).getChampionId();
+                        String test = ChampionIdentifier[champId];
+                        ArrayList<String> team1 = new ArrayList<>();
+                        ArrayList<String> team2 = new ArrayList<>();
+                        Log.i("test", test);
                     }
+                    Log.i("test", "////////////");
                 }
             }
 
