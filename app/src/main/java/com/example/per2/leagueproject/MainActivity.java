@@ -117,21 +117,18 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<MatchHistory> call, Response<MatchHistory> response) {
                 if (response.body() != null && response.body().getEndIndex() != 0) {
                     int loadingLength;
-//                    if(response.body().getMatches().size()>=20){
-//                        loadingLength = 20;
-//                        for(int i = 0;i < loadingLength;i++) {
-//                            gameId = response.body().getMatches().get(i).getGameId() + "";
-//                            searchIndMatch(reg, gameId);
-//                        }
-//                    }else{
-//                        loadingLength = response.body().getMatches().size();
-//                        for(int i = 0;i < loadingLength;i++) {
-//                            gameId = response.body().getMatches().get(i).getGameId() + "";
-//                            searchIndMatch(reg, gameId);
-//                        }
-//                    }
-                    for (int i = 0; i < 20; i++) {
-                        searchIndMatch(reg, response.body().getMatches().get(0).getGameId() + "");
+                    if (response.body().getMatches().size() >= 20) {
+                        loadingLength = 20;
+                        for (int i = 0; i < loadingLength; i++) {
+                            gameId = response.body().getMatches().get(i).getGameId() + "";
+                            searchIndMatch(reg, gameId);
+                        }
+                    } else {
+                        loadingLength = response.body().getMatches().size();
+                        for (int i = 0; i < loadingLength; i++) {
+                            gameId = response.body().getMatches().get(i).getGameId() + "";
+                            searchIndMatch(reg, gameId);
+                        }
                     }
                 }
             }
@@ -144,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void searchIndMatch(String region, String gameId) {
+    public void searchIndMatch(String region, final String gameId) {
         String url = "https://" + region + ".api.riotgames.com/lol/match/v4/matches/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -158,18 +155,21 @@ public class MainActivity extends AppCompatActivity {
         MatchResponse.enqueue(new Callback<Match>() {
             @Override
             public void onResponse(Call<Match> call, Response<Match> response) {
-                if(response.body().getQueueId() == 325 || response.body().getQueueId()== 400 || response.body().getQueueId() == 430 || response.body().getQueueId() == 420
-                        || response.body().getQueueId() == 440 || response.body().getQueueId() == 450 || response.body().getQueueId() == 600
-                        || response.body().getQueueId() == 700 || response.body().getQueueId() == 830 || response.body().getQueueId() == 840
-                        || response.body().getQueueId() == 850) {
-                    for(int i = 0;i<response.body().getParticipants().size();i++) {
-                        int champId = response.body().getParticipants().get(i).getChampionId();
-                        String test = ChampionIdentifier[champId];
-                        ArrayList<String> team1 = new ArrayList<>();
-                        ArrayList<String> team2 = new ArrayList<>();
-                        Log.i("test", test);
+                if (response.body() != null && response.body().getGameType() != null) {
+                    if (response.body().getQueueId() == 325 || response.body().getQueueId() == 400 || response.body().getQueueId() == 430 || response.body().getQueueId() == 420
+                            || response.body().getQueueId() == 440 || response.body().getQueueId() == 450 || response.body().getQueueId() == 600
+                            || response.body().getQueueId() == 700 || response.body().getQueueId() == 830 || response.body().getQueueId() == 840
+                            || response.body().getQueueId() == 850) {
+                        for (int i = 0; i < response.body().getParticipants().size(); i++) {
+                            int champId = response.body().getParticipants().get(i).getChampionId();
+                            String test = ChampionIdentifier[champId];
+                            ArrayList<String> team1 = new ArrayList<>();
+                            ArrayList<String> team2 = new ArrayList<>();
+                            Log.i("test", test);
+                        }
                     }
-                    Log.i("test", "////////////");
+                } else {
+                    searchIndMatch(reg, gameId);
                 }
             }
 
