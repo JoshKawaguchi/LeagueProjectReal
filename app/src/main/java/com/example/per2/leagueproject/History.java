@@ -18,19 +18,11 @@ public class History implements Parcelable {
             return new History[size];
         }
     };
-    public String time;
     public String outcome;
     public String kda;
     public Image spell1;
     public Image mainchamp;
     public Image spell2;
-    public Image item1;
-    public Image item2;
-    public Image item3;
-    public Image item4;
-    public Image item5;
-    public Image item6;
-    public Image trinket;
     public Image team1;
     public Image team2;
     public Image team3;
@@ -50,19 +42,11 @@ public class History implements Parcelable {
                    Image item6, Image trinket, Image team1, Image team2, Image team3,
                    Image team4, Image team5, Image enemy1, Image enemy2, Image enemy3,
                    Image enemy4, Image enemy5) {
-        this.time = time;
         this.outcome = outcome;
         this.kda = kda;
         this.mainchamp = mainchamp;
         this.spell1 = spell1;
         this.spell2 = spell2;
-        this.item1 = item1;
-        this.item2 = item2;
-        this.item3 = item3;
-        this.item4 = item4;
-        this.item5 = item5;
-        this.item6 = item6;
-        this.trinket = trinket;
         this.enemy1 = enemy1;
         this.enemy2 = enemy2;
         this.enemy3 = enemy3;
@@ -77,19 +61,11 @@ public class History implements Parcelable {
     }
 
     protected History(Parcel in) {
-        time = in.readString();
         outcome = in.readString();
         kda = in.readString();
         mainchamp = (Image) in.readValue(Image.class.getClassLoader());
         spell1 = (Image) in.readValue(Image.class.getClassLoader());
         spell2 = (Image) in.readValue(Image.class.getClassLoader());
-        item1 = (Image) in.readValue(Image.class.getClassLoader());
-        item2 = (Image) in.readValue(Image.class.getClassLoader());
-        item3 = (Image) in.readValue(Image.class.getClassLoader());
-        item4 = (Image) in.readValue(Image.class.getClassLoader());
-        item5 = (Image) in.readValue(Image.class.getClassLoader());
-        item6 = (Image) in.readValue(Image.class.getClassLoader());
-        trinket = (Image) in.readValue(Image.class.getClassLoader());
         team1 = (Image) in.readValue(Image.class.getClassLoader());
         team2 = (Image) in.readValue(Image.class.getClassLoader());
         team3 = (Image) in.readValue(Image.class.getClassLoader());
@@ -102,13 +78,6 @@ public class History implements Parcelable {
         enemy5 = (Image) in.readValue(Image.class.getClassLoader());
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getOutcome() {
         return outcome;
@@ -150,61 +119,6 @@ public class History implements Parcelable {
         this.spell2 = spell2;
     }
 
-    public Image getItem1() {
-        return item1;
-    }
-
-    public void setItem1(Image item1) {
-        this.item1 = item1;
-    }
-
-    public Image getItem2() {
-        return item2;
-    }
-
-    public void setItem2(Image item2) {
-        this.item2 = item2;
-    }
-
-    public Image getItem3() {
-        return item3;
-    }
-
-    public void setItem3(Image item3) {
-        this.item3 = item3;
-    }
-
-    public Image getItem4() {
-        return item4;
-    }
-
-    public void setItem4(Image item4) {
-        this.item4 = item4;
-    }
-
-    public Image getItem5() {
-        return item5;
-    }
-
-    public void setItem5(Image item5) {
-        this.item5 = item5;
-    }
-
-    public Image getItem6() {
-        return item6;
-    }
-
-    public void setItem6(Image item6) {
-        this.item6 = item6;
-    }
-
-    public Image getTrinket() {
-        return trinket;
-    }
-
-    public void setTrinket(Image trinket) {
-        this.trinket = trinket;
-    }
 
     public Image getTeam1() {
         return team1;
@@ -289,19 +203,11 @@ public class History implements Parcelable {
     @Override
     public String toString() {
         return "History{" +
-                "time='" + time + '\'' +
                 ", outcome='" + outcome + '\'' +
                 ", kda='" + kda + '\'' +
                 ", mainchamp='" + mainchamp + '\'' +
                 ", spell1=" + spell1 +
                 ", spell2=" + spell2 +
-                ", item1=" + item1 +
-                ", item2=" + item2 +
-                ", item3=" + item3 +
-                ", item4=" + item4 +
-                ", item5=" + item5 +
-                ", item6=" + item6 +
-                ", trinket=" + trinket +
                 ", team1=" + team1 +
                 ", team2=" + team2 +
                 ", team3=" + team3 +
@@ -322,19 +228,11 @@ public class History implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(time);
         dest.writeString(outcome);
         dest.writeString(kda);
         dest.writeValue(mainchamp);
         dest.writeValue(spell1);
         dest.writeValue(spell2);
-        dest.writeValue(item1);
-        dest.writeValue(item2);
-        dest.writeValue(item3);
-        dest.writeValue(item4);
-        dest.writeValue(item5);
-        dest.writeValue(item6);
-        dest.writeValue(trinket);
         dest.writeValue(team1);
         dest.writeValue(team2);
         dest.writeValue(team3);

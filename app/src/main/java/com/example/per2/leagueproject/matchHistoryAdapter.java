@@ -56,17 +56,9 @@ public class matchHistoryAdapter extends ArrayAdapter<History> {
         }
         TextView textViewOutcome = convertView.findViewById(R.id.textView_outcome);
         TextView textViewKDA = convertView.findViewById(R.id.textView_kda);
-        TextView textViewTime = convertView.findViewById(R.id.textView_time);
         ImageView imageViewMainChamp = convertView.findViewById(R.id.imageView_mainchamp);
         ImageView imageViewSpell1 = convertView.findViewById(R.id.imageView_spell1);
         ImageView imageViewSpell2 = convertView.findViewById(R.id.imageView_spell2);
-        ImageView imageViewItem1 = convertView.findViewById(R.id.imageView_item1);
-        ImageView imageViewItem2 = convertView.findViewById(R.id.imageView_item2);
-        ImageView imageViewItem3 = convertView.findViewById(R.id.imageView_item3);
-        ImageView imageViewItem4 = convertView.findViewById(R.id.imageView_item4);
-        ImageView imageViewItem5 = convertView.findViewById(R.id.imageView_item5);
-        ImageView imageViewItem6 = convertView.findViewById(R.id.imageView_item6);
-        ImageView imageViewtrinket = convertView.findViewById(R.id.imageView_trinket);
         ImageView imageViewteam1 = convertView.findViewById(R.id.imageView_team1);
         ImageView imageViewteam2 = convertView.findViewById(R.id.imageView_team2);
         ImageView imageViewteam3 = convertView.findViewById(R.id.imageView_team3);
@@ -81,17 +73,9 @@ public class matchHistoryAdapter extends ArrayAdapter<History> {
         History currentHistory = listViewHistory.get(position);
         textViewOutcome.setText(currentHistory.getOutcome());
         textViewKDA.setText(currentHistory.getKda());
-        textViewTime.setText(currentHistory.getTime());
         Picasso.get().load(mainchamp).into(imageViewMainChamp);
         Picasso.get().load(spell1).into(imageViewSpell1);
         Picasso.get().load(spell2).into(imageViewSpell2);
-        Picasso.get().load(item1).into(imageViewItem1);
-        Picasso.get().load(item2).into(imageViewItem2);
-        Picasso.get().load(item3).into(imageViewItem3);
-        Picasso.get().load(item4).into(imageViewItem4);
-        Picasso.get().load(item5).into(imageViewItem5);
-        Picasso.get().load(item6).into(imageViewItem6);
-        Picasso.get().load(trinket).into(imageViewtrinket);
         Picasso.get().load(team1).into(imageViewteam1);
         Picasso.get().load(team2).into(imageViewteam2);
         Picasso.get().load(team3).into(imageViewteam3);

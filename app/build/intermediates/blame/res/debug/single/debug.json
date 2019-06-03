@@ -492,6 +492,10 @@
         "source": "C:\\Users\\jkawa\\.gradle\\caches\\transforms-2\\files-2.1\\3fce99a5389147af46ca97e8a57b5333\\res\\drawable-xxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
+        "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_match_histry.xml.flat",
+        "source": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\src\\main\\res\\layout\\activity_match_histry.xml"
+    },
+    {
         "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_alert_dialog_material.xml.flat",
         "source": "C:\\Users\\jkawa\\.gradle\\caches\\transforms-2\\files-2.1\\3fce99a5389147af46ca97e8a57b5333\\res\\layout\\abc_alert_dialog_material.xml"
     },
@@ -1272,10 +1276,6 @@
         "source": "C:\\Users\\jkawa\\.gradle\\caches\\transforms-2\\files-2.1\\3fce99a5389147af46ca97e8a57b5333\\res\\color-v21\\abc_btn_colored_borderless_text_material.xml"
     },
     {
-        "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_etste.xml.flat",
-        "source": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\src\\main\\res\\layout\\activity_etste.xml"
-    },
-    {
         "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
@@ -1614,6 +1614,10 @@
     {
         "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\jkawa\\.gradle\\caches\\transforms-2\\files-2.1\\3fce99a5389147af46ca97e8a57b5333\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_match_history_adapter.xml.flat",
+        "source": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\src\\main\\res\\layout\\activity_match_history_adapter.xml"
     },
     {
         "merged": "C:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",

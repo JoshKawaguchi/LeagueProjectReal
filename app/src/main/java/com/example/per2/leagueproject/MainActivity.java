@@ -1,5 +1,6 @@
 package com.example.per2.leagueproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,11 +31,17 @@ public class MainActivity extends AppCompatActivity {
     private Spinner region;
     private String regionArray[];
     private ImageView test;
+    public static final String EXTRA_ACCOUNTID = "accountId";
     public String reg;
     public String accId;
     public String gameId;
     public static String[] ChampionIdentifier;
     public List<Champ> champList;
+    public static final String EXTRA_ACCOUNTLVL = "accountLvl";
+    public static final String EXTRA_ACCOUNTNAME = "accountName";
+    public static final String EXTRA_REGION = "region";
+    public static final String EXTRA_RANK = "RANK";
+    public String accName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        // convert your array to a list using the Arrays utility class
         champList = champs.getData();
         ChampionIdentifier = new String[1000];
+        accName = name.getText().toString();
         Identify();
         //Picasso.get().load("http://ddragon.leagueoflegends.com/cdn/9.9.1/img/champion/Zoe.png").placeholder(R.drawable.placeholder).into(test);
 
@@ -66,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private void Identify() {
         for (int z = 0; z < champList.size(); z++) {
             int champNum = Integer.parseInt(champList.get(z).getKey());
-            String champName = champList.get(z).getName();
+            String champName = champList.get(z).getId();
             ChampionIdentifier[champNum] = champName;
         }
     }
@@ -88,6 +96,22 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body() != null && !response.body().getAccountId().isEmpty()) {
                     accId = response.body().getAccountId();
                     searchMatchHistory(reg, accId);
+
+                    Intent matchHistory = new Intent(MainActivity.this,
+                            MatchHistoryActivity.class);
+
+                    Bundle extras = new Bundle();
+                    searchMatchHistory(reg, accId);
+                    String accountId = response.body().getAccountId();
+                    extras.putString(EXTRA_ACCOUNTID, accountId);
+                    extras.putString(EXTRA_ACCOUNTNAME, name.getText().toString());
+                    extras.putString(EXTRA_REGION, reg);
+                    extras.putString(EXTRA_ACCOUNTLVL, "" + response.body().getSummonerLevel());
+                    extras.putString(EXTRA_RANK, response.body().getId());
+                    matchHistory.putExtras(extras);
+                    if (!accountId.isEmpty()) {
+                        startActivity(matchHistory);
+                    }
                     //Toast.makeText(MainActivity.this, response.body().getAccountId(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "That name doesn't exist", Toast.LENGTH_SHORT).show();
@@ -166,6 +190,22 @@ public class MainActivity extends AppCompatActivity {
                             ArrayList<String> team1 = new ArrayList<>();
                             ArrayList<String> team2 = new ArrayList<>();
                             Log.i("test", test);
+//
+//                            String name1 =response.body().getParticipantIdentities().get(i).getPlayer().getSummonerName().toLowerCase();
+//                            int s = response.body().getParticipantIdentities().get(i).getParticipantId();
+//                            String rank = response.body().getParticipants().get(response.body().getParticipantIdentities().get(i).getParticipantId()).getHighestAchievedSeasonTier();
+//                            if(name1.equals(name.getText().toString().toLowerCase()) && rank != null)
+//                            {
+//                                Log.i("www", name1);
+//                                Log.i("www", "" + s);
+//                                Log.i("www", rank);
+//                                Intent rank1 = new Intent(MainActivity.this,
+//                                        MatchHistoryActivity.class);
+//
+//                                Bundle extras = new Bundle();
+//                                extras.putString("RANK",rank);
+//                                rank1.putExtras(extras);
+//                            }
                         }
                     }
                 } else {
@@ -180,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 

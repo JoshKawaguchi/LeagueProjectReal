@@ -1,4 +1,4 @@
-#Sat Jun 01 14:06:55 PDT 2019
+#Sun Jun 02 23:50:38 PDT 2019
 base.0=C\:\\Users\\jkawa\\StudioProjects\\LeagueProjectReal\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
 path.0=classes.dex
 renamed.0=classes.dex
